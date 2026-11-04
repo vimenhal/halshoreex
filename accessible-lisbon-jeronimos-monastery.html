@@ -1051,6 +1051,7 @@ div.fact .fact-value{ justify-content:flex-start }
     const h = e.target.closest('[data-handoff]');
     if (!h || h.disabled) return;
     e.preventDefault();
+    if (h.dataset.handoff === 'back') { location.href = 'index.html'; return; }
     showToast(`Hand-off: ${h.dataset.handoff}`);
   });
 
