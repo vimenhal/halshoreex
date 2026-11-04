@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shore Excursions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ds-hal-blue:#022658;
+  --ds-dutch-orange:#ff7f32;
+  --ds-dutch-cream:#f8eddc;
+  --ds-n100:#030f1f;
+  --ds-n70:#4f5763;
+  --ds-n10:#e6e7e9;
+  --ds-n5:#f2f3f4;
+  --ds-focus-blue:#1979ff;
+  --serif:"HAL Headline", "Gelasio", Georgia, "Times New Roman", serif;
+  --sans:"HAL Body", "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --radius:24px;
+  --pad:20px;
+}
+*{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{
+  margin:0; background:#fff; color:var(--ds-n100);
+  font-family:var(--sans); font-size:16px; line-height:1.6; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{ max-width:1200px; margin:0 auto; padding:0 var(--pad) }
+
+/* Header */
+.masthead{ background:var(--ds-hal-blue); color:#fff; padding:48px 0 40px }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px; margin:0 0 12px;
+  font-size:13px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--ds-dutch-cream);
+}
+.eyebrow::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--ds-dutch-orange) }
+h1{
+  margin:0; font-family:var(--serif); font-weight:400; letter-spacing:-.01em; line-height:1.2;
+  font-size:clamp(32px, 5vw, 48px);
+}
+.lede{ margin:12px 0 0; max-width:560px; color:rgba(255,255,255,.8) }
+
+/* Grid */
+main{ padding:var(--pad) 0 }
+.count{ margin:0 0 20px; font-size:14px; color:var(--ds-n70) }
+.grid{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap:24px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));
+}
+@media (max-width:400px){ .grid{ grid-template-columns:1fr } }
+
+/* Card: hero photo with title on a bottom ramp, echoing the detail page hero */
+.card{
+  position:relative; display:block; height:100%; aspect-ratio:4/5; overflow:hidden;
+  border-radius:var(--radius); color:#fff; text-decoration:none;
+  background:var(--ds-hal-blue);
+  box-shadow:0 2px 4px rgba(51,51,51,.10), 0 0 1px rgba(51,51,51,.10);
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.card > img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform .6s var(--ease);
+}
+.card::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(to bottom, rgba(3,15,31,.35) 0%, rgba(3,15,31,0) 22%);
+}
+.card:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(3,15,31,.22) }
+.card:hover > img{ transform:scale(1.04) }
+.card:focus-visible{ outline:3px solid var(--ds-focus-blue); outline-offset:3px }
+
+.day{
+  position:absolute; z-index:1; top:16px; left:16px;
+  padding:4px 12px; border-radius:999px; font-size:13px; font-weight:600;
+  background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.28);
+  -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+}
+/* The ramp lives on the text block, so it grows with long titles and always sits behind the text */
+.body{
+  position:absolute; z-index:1; left:0; right:0; bottom:0; padding:96px 20px 20px;
+  background:linear-gradient(to top, rgba(2,30,70,.97) 0%, rgba(2,38,88,.9) 55%, rgba(2,38,88,.6) 78%, rgba(2,38,88,0) 100%);
+  text-shadow:0 1px 2px rgba(3,15,31,.4);
+}
+.badge{
+  display:inline-flex; align-items:center; gap:6px; margin:0 0 10px;
+  padding:3px 10px; border-radius:999px; font-size:12px; font-weight:500;
+  color:var(--ds-dutch-cream); border:1px solid rgba(248,237,220,.6);
+}
+.badge.history{ color:#f0b63c; border-color:rgba(240,182,60,.7) }
+.badge img{ display:block; width:16px; height:auto; flex:none }
+.badge{ background:rgba(2,30,70,.55); text-shadow:none }
+.title{
+  margin:0; font-family:var(--serif); font-weight:400; font-size:26px; line-height:1.2; letter-spacing:-.01em;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+}
+.port{ margin:6px 0 0; font-size:14px; color:rgba(255,255,255,.85);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.meta{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:12px;
+  margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,.16);
+}
+.meta .lbl{ display:block; font-size:12px; color:rgba(255,255,255,.7) }
+.meta b{ font-size:17px; font-weight:600 }
+.meta .price{ text-align:right }
+
+@media (prefers-reduced-motion:reduce){
+  .card, .card > img{ transition:none }
+  .card:hover, .card:hover > img{ transform:none }
+}
+</style>
+</head>
+<body>
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Shore Excursions</h1>
+<main class="wrap">
+  <ul class="grid">
+    <li><a class="card" href="kauai-hiking-adventure.html">
+      <img src="assets/kauai-napali-coast.webp" alt="" loading="lazy">
+      <span class="day">Day 7 · Mon, Feb 1, 2027</span>
+      <div class="body">
+        <h2 class="title">Kauai Hiking Adventure</h2>
+        <p class="port">Nawiliwili, Kauai, Hawaii, US</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>4.5 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$199.95</b></span></div>
+      </div>
+    </a></li>
+
+    <li><a class="card" href="easter-island-panorama.html">
+      <img src="assets/easter-island-moai.webp" alt="" loading="lazy">
+      <span class="day">Day 16 · Wed, Jan 20, 2027</span>
+      <div class="body">
+        <h2 class="title">Easter Island Panorama</h2>
+        <p class="port">Easter Island, Chile</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>3 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$299.95</b></span></div>
+      </div>
+    </a></li>
+
+    <li><a class="card" href="tahiti-lagoon-discovery.html">
+      <img src="assets/tahiti-lagoon.webp" alt="" loading="lazy">
+      <span class="day">Day 22 · Tue, Jan 26, 2027</span>
+      <div class="body">
+        <h2 class="title">Tahiti Lagoon Discovery</h2>
+        <p class="port">Papeete, French Polynesia</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>3 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$139.95</b></span></div>
+      </div>
+    </a></li>
+
+    <li><a class="card" href="seaplane-flight-fine-dining.html">
+      <img src="assets/sydney-opera-house.webp" alt="" loading="lazy">
+      <span class="day">Day 37 · Wed, Feb 10, 2027</span>
+      <div class="body">
+        <h2 class="title">Seaplane Flight &amp; Fine Dining</h2>
+        <p class="port">Sydney, Australia</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>5 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$964.95</b></span></div>
+      </div>
+    </a></li>
+
+    <li><a class="card" href="hidden-lanzarote.html">
+      <img src="assets/lanzarote-cactus-garden.webp" alt="" loading="lazy">
+      <span class="day">Day 100 · Wed, Apr 14, 2027</span>
+      <div class="body">
+        <h2 class="title">Hidden Lanzarote</h2>
+        <p class="port">Arrecife, Lanzarote, Canary Islands, Spain</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>4 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$89.95</b></span></div>
+      </div>
+    </a></li>
+
+    <li><a class="card" href="accessible-lisbon-jeronimos-monastery.html">
+      <img src="assets/lisbon-jeronimos.webp" alt="" loading="lazy">
+      <span class="day">Day 104 · Sun, Apr 18, 2027</span>
+      <div class="body">
+        <p class="badge">Accessible Travel Solutions Exclusive</p>
+        <h2 class="title">Accessible Lisbon &amp; Jeronimos Monastery</h2>
+        <p class="port">Lisbon, Portugal</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>4 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$299.95</b></span></div>
+      </div>
+    </a></li>
+
+    <li><a class="card" href="kings-vikings-roskilde.html">
+      <img src="assets/roskilde-cathedral.webp" alt="" loading="lazy">
+      <span class="day">Day 116 · Fri, Apr 30, 2027</span>
+      <div class="body">
+        <p class="badge history"><img src="assets/history-h.png" alt="">HISTORY Channel Exclusive</p>
+        <h2 class="title">Kings &amp; Vikings: The Viking Ship Museum &amp; Roskilde Cathedral curated with The HISTORY Channel</h2>
+        <p class="port">Copenhagen, Denmark</p>
+        <div class="meta"><span><span class="lbl">Duration</span><b>4.5 hours</b></span><span class="price"><span class="lbl">Per adult</span><b>$189.95</b></span></div>
+      </div>
+    </a></li>
+  </ul>
+</main>
+</body>
+</html>
